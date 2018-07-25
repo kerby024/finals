@@ -1,0 +1,7 @@
+#pokers{
+border: 5px black solid;
+display: inline-block;
+padding: 10px;
+width: 300px;
+overflow-y: scroll;
+}

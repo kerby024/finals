@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam_app/styles.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Pokes</title>
+</head>
+<body>
+    <a href="/pokes/clear">Logout</a>
+    <h1>Welcome {{request.session.name}}</h1>
+    <br>
+    <div id="pokers">
+              {% for x in me %} 
+        {{x.user.name}}...poked you... {{x.poked.pokers.count}}...times<br>
+        {% endfor %}
+       
+    </div> <br> <br>
+    <div>
+        People you may want to poke:
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Alias</th>
+                <th>Email Address</th>
+                <th>Poke History</th>
+                <th>Action</th>
+            </tr>
+            {% for x in users %}
+            <tr>
+                <td>{{x.name}}</td>
+                <td>{{x.alias}}</td>
+                <td>{{x.email_address}}</td>
+                <td>{{x.pokers.count}}</td>
+                <form action="/pokes/poker/{{x.id}}" method="post">
+                    {% csrf_token %}
+                    <td><button type="submit">Poke</button></td>
+                </form>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>
